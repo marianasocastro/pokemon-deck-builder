@@ -13,6 +13,13 @@ export class FilterComponent {
   @Output() searchTermChange = new EventEmitter<string>();
   @Output() filterChange = new EventEmitter<{ filterType: string, value: string }>();
 
+  public selectedFilters = [
+    { text: 'Country', id: '1', icon: 'place' },
+    { text: 'City', id: '2', icon: 'location_city' },
+    { text: 'Address', id: '3', icon: 'home' },
+    { text: 'Street', id: '4', icon: 'streetview' }
+];
+
   onSearchTermChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.searchTermChange.emit(inputElement.value);
@@ -23,6 +30,5 @@ export class FilterComponent {
     this.filterChange.emit({ filterType, value: selectElement.value });
   }
 
-
-
 }
+

@@ -1,0 +1,23 @@
+
+igx-card-header{
+  padding: 0px !important;
+}
+
+igx-card{
+  border: none;
+}
+
+.igx-card--horizontal{
+  justify-content: space-between;
+  margin-bottom: 5px !important;
+}
+
+.igx-card--horizontal, .igx-card-actions {
+  padding: 0px;
+}
+
+button{
+  height: 100%;
+  background-color: #E3350D;
+}
+

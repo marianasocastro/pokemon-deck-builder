@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from '../models/card.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DeckService } from '../services/deck.service';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,14 +31,12 @@ export class SidebarComponent {
 
 
   constructor(
-    private deckService: DeckService,
-    private router: Router,
     private route: ActivatedRoute,
   ){}
 
 
-  ngOnInit(): void {
-
+  isCurrentRouteMyDecks(): boolean {
+    return this.route.snapshot.url.some(segment => segment.path === 'my-decks');
   }
 
   onDeckNameChange(newName: string): void {

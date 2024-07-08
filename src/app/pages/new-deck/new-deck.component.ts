@@ -6,7 +6,7 @@ import { Deck } from 'src/app/models/deck.model';
 import { CardsService } from 'src/app/services/cards.service';
 import { DeckService } from 'src/app/services/deck.service';
 
-import { IgxButtonDirective, IgxRippleDirective, IgxDialogComponent } from 'igniteui-angular';
+import {  IgxDialogComponent } from 'igniteui-angular';
 import { IgxSnackbarComponent } from 'igniteui-angular';
 
 @Component({
@@ -41,9 +41,9 @@ export class NewDeckComponent implements OnInit{
   viewMode: boolean = false;
   editMode: boolean = true;
   private deckIdToDelete: string | null = null;
+  isLoading = false;
 
   @ViewChild('snackbar', { static: true }) public snackbar!: IgxSnackbarComponent;
-  @ViewChild('snackbarLoadingCards', { static: true }) public snackbarLoadingCards!: IgxSnackbarComponent;
   @ViewChild('dialogCancelConfirmation', { static: true }) public dialogCancelConfirmation!: IgxDialogComponent;
   @ViewChild('dialogDeleteConfirmation', { static: true }) public dialogDeleteConfirmation!: IgxDialogComponent;
 
@@ -56,7 +56,9 @@ export class NewDeckComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.snackbarLoadingCards.open();
+    this.viewMode = false;
+    this.editMode = true
+    this.isLoading = true
     const forkJoinSub = forkJoin({
       cards: this.cardsService.getAllCards(),
       subtypes: this.cardsService.getSubtypes(),
@@ -69,7 +71,7 @@ export class NewDeckComponent implements OnInit{
         this.subtypes = results.subtypes;
         this.supertypes = results.supertypes;
         this.types = results.types;
-        this.snackbarLoadingCards.close();
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Erro ao carregar dados:', error);
@@ -81,6 +83,7 @@ export class NewDeckComponent implements OnInit{
     const routeSub = this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
+        this.deckIdToDelete = id;
         const deck = this.deckService.getDeckById(id);
         if (deck) {
           this.id = id
@@ -104,8 +107,8 @@ export class NewDeckComponent implements OnInit{
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.snackbar.close();
   }
-
 
   onSearchTermChange(searchTerm: string): void {
     this.searchTerm = searchTerm;
@@ -127,9 +130,9 @@ export class NewDeckComponent implements OnInit{
     this.filteredCards = this.cards.filter(item => {
       return (
         (!this.searchTerm || item.name.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-        (!this.filters.supertype|| item.supertype === this.filters.supertype) &&
-        (!this.filters.subtype || item.subtypes.includes(this.filters.subtype)) &&
-        (!this.filters.type || item.types.includes(this.filters.type))
+        (!this.filters.supertype || item.supertype === this.filters.supertype) &&
+        (!this.filters.subtype || (item.subtypes ?? []).includes(this.filters.subtype)) &&
+        (!this.filters.type || (item.types ?? []).includes(this.filters.type))
       );
     });
   }
@@ -216,14 +219,6 @@ export class NewDeckComponent implements OnInit{
     return cardInDeck ? cardInDeck.countInDeck : 0;
   }
 
-  // cancel() {
-  //   const confirmation = window.confirm('Você tem certeza que cancelar a construção do baralho?');
-  //   if (confirmation) {
-  //     this.router.navigate(['']);
-  //   }
-  // }
-
-
   saveDeck() {
     if(this.totalCards < 24 || this.totalCards > 60){
       this.snackbar.open('Seu deck deve ter o mínimo de 24 e máximo de 60 cartas.');
@@ -275,16 +270,6 @@ export class NewDeckComponent implements OnInit{
       this.router.navigate(['/my-decks']);
     }
   }
-
-  // deleteDeck(id: string): void {
-  //   const confirmation = window.confirm('Você tem certeza que deseja excluir este baralho?');
-  //   if (confirmation) {
-  //     this.deckService.deleteDeck(id);
-  //     this.router.navigate(['/my-decks']);
-  //   }
-  // }
-
-
 
   removeFromDeck(card: Card): void {
     let index = -1;
@@ -353,24 +338,22 @@ export class NewDeckComponent implements OnInit{
   }
 
   deleteDeck(id: string): void {
-    this.deckIdToDelete = id;
     this.dialogDeleteConfirmation.open();
   }
 
   cancelDelete(): void {
-    this.deckIdToDelete = null;
     this.dialogDeleteConfirmation.close();
   }
 
   confirmDelete(): void {
-    if (this.deckIdToDelete) {
-      this.deckService.deleteDeck(this.deckIdToDelete);
-      this.deckIdToDelete = null;
+    console.log("clicou")
+    console.log("id:", this.id)
+    console.log("id to delete:", this.deckIdToDelete)
+    if (this.id) {
+      this.deckService.deleteDeck(this.id);
       this.router.navigate(['/my-decks']);
     }
-    this.dialogDeleteConfirmation.close();
   }
-
 
 }
 

@@ -8,20 +8,18 @@
     <div class="flex flex-wrap flex-row justify-evenly align-top gap-2 custom-scrollbar overflow-y-auto">
       <img class="w-40 h-auto relative hover:cursor-pointer" *ngFor="let card of filteredCards" [src]="card.imageSmall" [alt]="card.name" (click)="addCardToDeck(card)">
     </div>
-  </div>
-  <igx-snackbar #snackbarLoadingCards [autoHide]="false">
-    <div class="flex items-center justify-start w-full p-4 space-x-4">
-      <p class="whitespace-nowrap">Carregando</p>
-      <svg id="dots" height="20px">
-        <g id="dots" fill="#999999">
-          <circle id="dot1" cx="5" cy="18" r="2"></circle>
-          <circle id="dot2" cx="15" cy="18" r="2"></circle>
-          <circle id="dot3" cx="25" cy="18" r="2"></circle>
-        </g>
-      </svg>
-    </div>
-  </igx-snackbar>
 
+    <div *ngIf="isLoading" class="flex flex-col gap-6 mx-auto my-auto pl-4 w-fit">
+      <img class="w-72" src="../../../assets/Characters_walk.gif" alt="Carregando cartas...">
+      <p class="text-center">Carregando cartas...</p>
+    </div>
+
+    <div *ngIf="!isLoading && filteredCards.length === 0" class="flex flex-col items-center gap-2 mx-auto my-auto pl-4 w-fit">
+      <img class="w-28" src="../../../assets/Sleeping_pokemon.gif" alt="Carregando cartas...">
+      <p class="text-center">Nenhum resultado encontrado para essa busca</p>
+    </div>
+
+  </div>
 
   <igx-snackbar clas #snackbar [autoHide]="false" actionText="CLOSE" (clicked)="close(snackbar)"></igx-snackbar>
 

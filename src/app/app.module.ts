@@ -15,8 +15,8 @@ import { MyDecksComponent } from './pages/my-decks/my-decks.component';
 import { InfoDeckCardComponent } from './info-deck-card/info-deck-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxSnackbarModule } from 'igniteui-angular';
-import { IgxDialogModule } from 'igniteui-angular';
-import { LoaderSnackbarComponent } from './loader-snackbar/loader-snackbar.component';
+import { IgxDialogModule, IgxCardModule } from 'igniteui-angular';
+import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { LoaderSnackbarComponent } from './loader-snackbar/loader-snackbar.compo
     SidebarComponent,
     MyDecksComponent,
     InfoDeckCardComponent,
-    LoaderSnackbarComponent
+    HorizontalCardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +37,8 @@ import { LoaderSnackbarComponent } from './loader-snackbar/loader-snackbar.compo
     FormsModule,
     BrowserAnimationsModule,
     IgxSnackbarModule,
-    IgxDialogModule
+    IgxDialogModule,
+    IgxCardModule
   ],
   providers: [CardsService],
   bootstrap: [AppComponent]

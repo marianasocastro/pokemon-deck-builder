@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CardsService } from 'src/app/services/cards.service';
 import { Card } from '../../models/card.model'
 import { forkJoin } from 'rxjs';
-import { IgxSnackbarComponent } from 'igniteui-angular';
+
 
 @Component({
   selector: 'app-home',
@@ -23,12 +23,13 @@ export class HomeComponent implements OnInit{
     type: ''
   };
   cardToShow: string = '';
-  @ViewChild('snackbarLoadingCards', { static: true }) public snackbar!: IgxSnackbarComponent;
+  isLoading = false;
+
 
   constructor(private cardsService: CardsService){}
 
   ngOnInit(): void {
-    this.snackbar.open();
+    this.isLoading = true
     forkJoin({
       cards: this.cardsService.getAllCards(),
       subtypes: this.cardsService.getSubtypes(),
@@ -36,13 +37,13 @@ export class HomeComponent implements OnInit{
       types: this.cardsService.getTypes()
     }).subscribe({
       next: (results: any) => {
-
         this.cards = results.cards;
         this.filteredCards = results.cards;
         this.subtypes = results.subtypes;
         this.supertypes = results.supertypes;
         this.types = results.types;
-        this.snackbar.close();
+        this.isLoading = false;
+
 
       },
       error: (error) => {
@@ -72,9 +73,9 @@ export class HomeComponent implements OnInit{
     this.filteredCards = this.cards.filter(item => {
       return (
         (!this.searchTerm || item.name.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-        (!this.filters.supertype|| item.supertype === this.filters.supertype) &&
-        (!this.filters.subtype || item.subtypes.includes(this.filters.subtype)) &&
-        (!this.filters.type || item.types.includes(this.filters.type))
+        (!this.filters.supertype || item.supertype === this.filters.supertype) &&
+        (!this.filters.subtype || (item.subtypes ?? []).includes(this.filters.subtype)) &&
+        (!this.filters.type || (item.types ?? []).includes(this.filters.type))
       );
     });
   }

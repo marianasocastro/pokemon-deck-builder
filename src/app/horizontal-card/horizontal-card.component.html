@@ -1,0 +1,18 @@
+<igx-card type="outlined" [horizontal]="true">
+  <div class="h-sample-column" (mouseover)="onShowCardDetail()" (mouseleave)="onHideCardDetail()">
+    <igx-card-header>
+      <h5 igxCardHeaderTitle>{{ name }}</h5>
+      <h5 igxCardHeaderSubtitle>Quantidade: {{ countInDeck }}</h5>
+      <igx-card-media width="64px" height="64px">
+        <img [src]="imageSmall">
+      </igx-card-media>
+    </igx-card-header>
+  </div>
+  <igx-card-actions layout="justify">
+    <button *ngIf="isCurrentRouteMyDecks" (click)="onRemoveFromDeck()" igxIconButton="flat" igxRipple igxRippleCentered="true">
+      <span class="material-symbols-outlined rounded text-white bg-red p-1 self-ends">delete</span>
+    </button>
+  </igx-card-actions>
+</igx-card>
+
+

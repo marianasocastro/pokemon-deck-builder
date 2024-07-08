@@ -46,31 +46,9 @@ export class MyDecksComponent implements OnInit {
     this.router.navigate(['/edit-deck', id]);
   }
 
-  // deleteDeck(id: string): void {
-  //   const confirmation = window.confirm('Você tem certeza que deseja excluir este baralho?');
-  //   if (confirmation) {
-  //     this.deckService.deleteDeck(id);
-  //     // this.myDecks = this.deckService.getDecks();
-  //     this.selectedDeck = {
-  //       id: '',
-  //       name: '',
-  //       totalCards: 0,
-  //       numOfPokemonCards: 0,
-  //       numOfTrainerCards: 0,
-  //       numOfEnergyCards: 0,
-  //       pokemonCards: [],
-  //       trainerCards: [],
-  //       energyCards: [],
-  //       types: [],
-  //       image:''
-  //     };
-  //     this.snackbar.open(`Baralho excluído com sucesso!`);
-  //     this.myDecks = this.deckService.getDecks();
-  //     if(this.myDecks.length <= 0){
-  //       this.viewMode = false;
-  //     }
-  //   }
-  // }
+  ngOnDestroy(): void {
+    this.snackbar.close();
+  }
 
   deleteDeck(id: string): void {
     this.deckIdToDelete = id;
@@ -84,7 +62,6 @@ export class MyDecksComponent implements OnInit {
 
   confirmDelete(): void {
     this.deckService.deleteDeck(this.deckIdToDelete);
-    // this.myDecks = this.deckService.getDecks();
     this.selectedDeck = {
       id: '',
       name: '',
@@ -106,8 +83,6 @@ export class MyDecksComponent implements OnInit {
     this.dialogDeleteConfirmation.close();
   }
 
-
-
   handleSelectedDeck(id: string): void {
     this.selectedDeck = this.myDecks.find(deck => deck.id === id);
     this.viewMode = true;
@@ -116,7 +91,5 @@ export class MyDecksComponent implements OnInit {
   public close(element: any) {
     element.close();
   }
-
-
 
 }
