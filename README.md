@@ -29,7 +29,7 @@
 
 A aplicação é desenvolvida utilizando Angular 16+, Tailwind CSS e a biblioteca de UI Infragistics, com o objetivo de permitir que os jogadores montem baralhos de cartas utilizando a API de Pokémon TCG. A aplicação oferece funcionalidades para criar, visualizar, editar e remover baralhos, além de visualizar detalhes específicos de cada baralho. Os dados dos baralhos são armazenados apenas em memória.
 
-<!-- Acesse via Browser | Deploy: [Pokemon Deck Builder]() -->
+Acesse via Browser | Deploy: [Pokemon Deck Builder](https://pokemon-deck-builder.vercel.app/)
 
 ---
 

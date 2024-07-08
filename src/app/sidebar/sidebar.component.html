@@ -6,7 +6,7 @@
     <h3 class="text-white text-center text-2xl">Selecione um baralho para ver detalhes</h3>
   </div>
   <div *ngIf="viewMode && totalCards || editMode" class="p-4 flex flex-col justify-between gap-3 h-full">
-    <input *ngIf="!isCurrentRouteMyDecks()" class="bg-black-secondary text-2xl outline-none " [(ngModel)]="deckName" (ngModelChange)="onDeckNameChange($event)" placeholder="Nome do baralho">
+    <input *ngIf="!isCurrentRouteMyDecks()" class="bg-black-secondary text-2xl outline-none" maxlength="18" [(ngModel)]="deckName" (ngModelChange)="onDeckNameChange($event)" placeholder="Nome do baralho">
     <h4 *ngIf="isCurrentRouteMyDecks()" class="bg-black-secondary text-2xl outline-none ">{{ deckName }}</h4>
     <p>Cartas no baralho: {{ totalCards }}/60</p>
     <div class="flex flex-row align-middle gap-2">
