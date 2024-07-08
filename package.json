@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "tw:build": "npx tailwindcss -i ./src/styles.scss -o ./src/output.css --watch",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -18,6 +19,10 @@
     "@angular/platform-browser": "^14.0.0-next.0",
     "@angular/platform-browser-dynamic": "^14.0.0-next.0",
     "@angular/router": "^14.0.0-next.0",
+    "@igniteui/material-icons-extended": "^2.10.0",
+    "fflate": "^0.7.3",
+    "hammerjs": "^2.0.8",
+    "igniteui-angular": "^14.2.40",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -26,6 +31,8 @@
     "@angular-devkit/build-angular": "^14.2.0",
     "@angular/cli": "~16",
     "@angular/compiler-cli": "^14.0.0-next.0",
+    "@igniteui/angular-schematics": "~14.0.1000",
+    "@types/hammerjs": "^2.0.40",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
@@ -33,6 +40,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "postcss-import": "^16.1.0",
+    "tailwindcss": "^3.4.4",
     "typescript": "~4.7.2"
   }
 }

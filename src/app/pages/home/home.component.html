@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div style="height: calc(100vh - 250px);">
+  <header class="bg-black-primary text-white flex flex-row justify-center p-4 rounded mt-8 items-center mx-4">
+    <div class="flex flex-col items-center gap-3">
+      <h1 class="text-4xl ">Bem-vindo ao Pokémon Deck Builder</h1>
+      <!-- <p class="text-base">O que você gostaria de fazer primeiro?</p> -->
+      <div class="flex flex-row align-middle gap-4">
+        <button class="rounded bg-blue border-blue border-2 p-2 outline-none"><a routerLink="/new-deck">Criar Baralho</a></button>
+        <button class="rounded  border-white border-2 p-2 outline-none hover:border-none"><a routerLink="/my-decks">Ver meus baralhos</a></button>
+      </div>
+    </div>
+    <!-- <div class="w-2/4 flex justify-center">
+      <img class="h-32" src="../../../assets/jigglypuff.png" alt="jigglypuff">
+    </div> -->
+  </header>
+
+  <main class="flex flex-col gap-6 p-4" style="height:inherit;">
+    <app-filter [subtypes]="subtypes" [supertypes]="supertypes" [types]="types"
+    (searchTermChange)="onSearchTermChange($event)"
+    (filterChange)="onFilterChange($event)"></app-filter>
+    <div class="flex flex-wrap flex-row justify-evenly align-top gap-2 custom-scrollbar overflow-y-auto" >
+      <img
+      (mouseover)="showCardDetail(card.imageLarge)"
+      (mouseleave)="hideCardDetail()"
+      class="w-40 h-auto" *ngFor="let card of filteredCards" [src]="card.imageSmall" [alt]="card.name">
+      <div *ngIf="cardToShow" class="absolute inset-0 top-0 right-14 flex justify-center items-center">
+        <div class="p-4 shadow-md">
+          <img class="w-72 h-auto" [src]="cardToShow" alt="Imagem da carta">
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<igx-snackbar #snackbarLoadingCards [autoHide]="false">
+  <p class="inline">Carregando cartas</p>
+  <svg id="dots" height="20px">
+      <g id="dots" fill="#999999">
+          <circle id="dot1" cx="5" cy="18" r="2"></circle>
+          <circle id="dot2" cx="15" cy="18" r="2"></circle>
+          <circle id="dot3" cx="25" cy="18" r="2"></circle>
+      </g>
+  </svg>
+</igx-snackbar>
+
+
+

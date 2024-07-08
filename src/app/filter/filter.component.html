@@ -1,0 +1,20 @@
+<div class="flex flex-1 row justify-between align-middle gap-4">
+  <input (input)="onSearchTermChange($event)" class="flex-grow rounded border-black-primary border-2 p-2 outline-none w-1/5" type="text" placeholder="Buscar cartas...">
+  <select (change)="onFilterChange($event, 'supertype')" class="rounded border-black-primary border-2 p-2 outline-none" name="superType" id="supertype">
+    <option value="" disabled selected hidden>Supertype</option>
+    <option value="">All</option>
+    <option *ngFor="let supertype of supertypes" [value]="supertype">{{ supertype }}</option>
+  </select>
+
+  <select (change)="onFilterChange($event, 'subtype')" class="rounded border-black-primary border-2 p-2 outline-none" name="subType" id="subtype">
+    <option value="" disabled selected hidden>Subtype</option>
+    <option value="">All</option>
+    <option *ngFor="let subtype of subtypes" [value]="subtype">{{ subtype }}</option>
+  </select>
+
+  <select (change)="onFilterChange($event, 'type')" class="rounded border-black-primary border-2 p-2 outline-none" name="type" id="type">
+    <option value="" disabled selected hidden>Type</option>
+    <option value="">All</option>
+    <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+  </select>
+</div>
