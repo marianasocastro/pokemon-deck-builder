@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/output.css"
+              "src/output.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [
               "./node_modules/hammerjs/hammer.min.js"
