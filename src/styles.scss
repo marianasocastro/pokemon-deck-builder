@@ -29,3 +29,33 @@
   }
 }
 
+@media (min-width: 768px) {
+  .custom-md-height {
+    height: calc(100vh - 88px);
+  }
+}
+
+
+.igx-dialog{
+  margin: 0 10px;
+  .igx-button--flat {
+    color: #2E6EB5 !important;
+    background-color: transparent !important;
+    &:hover{
+
+      color: #E6BC2F !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
+.igx-snackbar__button{
+  color:#E6BC2F !important;
+  &:hover{
+    color:#E6BC2F !important;
+  }
+}
+
+
+
+

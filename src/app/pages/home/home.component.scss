@@ -1,30 +1,15 @@
-igx-snackbar{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-#dots #dot1 {
-  animation: load 1s infinite;
-}
-
-#dots #dot2 {
-  animation: load 1s infinite;
-  animation-delay: 0.2s;
+#video-bg, .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  // z-index: 1;
 }
 
-#dots #dot3 {
-  animation: load 1s infinite;
-  animation-delay: 0.4s;
-}
-
-@keyframes load {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.overlay{
+  // z-index: 2;
+  background: radial-gradient(circle, rgba(50, 50, 50, .3), rgba(50, 50, 50, .5));
 }

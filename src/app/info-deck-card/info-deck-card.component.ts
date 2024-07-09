@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Deck } from '../models/deck.model';
 
 @Component({
   selector: 'app-info-deck-card',
@@ -29,4 +30,6 @@ export class InfoDeckCardComponent {
   onSelectDeck(): void {
     this.selectDeckEvent.emit(this.id);
   }
+
+
 }
